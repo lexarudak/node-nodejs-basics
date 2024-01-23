@@ -1,8 +1,12 @@
 import { readdir, mkdir, copyFile } from "fs/promises"
-import { join } from "path"
+import { join, dirname } from "path"
+import { fileURLToPath } from "url"
 
-const pathFrom = "src/fs/files"
-const pathTo = "src/fs/files_copy"
+const currentModuleUrl = import.meta.url
+const __dirname = dirname(fileURLToPath(currentModuleUrl))
+
+const pathFrom = join(__dirname, "files")
+const pathTo = join(__dirname, "files_copy")
 const errorMessage = "FS operation failed"
 
 const errorHandler = (e) => {
