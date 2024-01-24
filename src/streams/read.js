@@ -8,7 +8,7 @@ const __dirname = dirname(fileURLToPath(currentModuleUrl))
 const filePath = join(__dirname, "files", "fileToRead.txt")
 
 const read = async () => {
-    pipeline(createReadStream(filePath), process.stdout)
+    await pipeline(createReadStream(filePath), process.stdout)
 };
 
 await read();

@@ -9,7 +9,7 @@ const filePath = join(__dirname, "files", "fileToWrite.txt")
 
 const write = async () => {
     console.log("- Press ENTER to write row\n- Press Ctrl+C to complete\n\n*Enter your text* ");
-    pipeline(process.stdin, createWriteStream(filePath))
+    await pipeline(process.stdin, createWriteStream(filePath))
 };
 
 await write();
