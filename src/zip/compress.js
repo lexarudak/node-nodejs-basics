@@ -1,7 +1,6 @@
 import { createReadStream, createWriteStream } from "fs"
 import { join, dirname } from "path"
 import { fileURLToPath } from "url"
-import { createHash } from "crypto";
 import { pipeline } from "stream/promises"
 
 import { createGzip } from 'zlib';
