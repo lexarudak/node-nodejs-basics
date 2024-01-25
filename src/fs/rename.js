@@ -7,23 +7,14 @@ const __dirname = dirname(fileURLToPath(currentModuleUrl))
 
 const wrongFilePath = join(__dirname, "files", "wrongFilename.txt")
 const properFilePath = join(__dirname, "files", "properFilename.md")
-const errorMessage = "FS operation failed"
-
-const checkFileExist = () => new Promise(async(res, rej) => {
-    try {
-        await access(properFilePath)
-        rej(new Error(errorMessage))
-    } catch {
-        res()
-    }
-})
+const error = new Error("FS operation failed")
+const flag = "wx"
 
 const rename = async () => {
     try {
-        await checkFileExist()
-        await nodeRename(wrongFilePath, properFilePath)
+        await nodeRename(wrongFilePath, properFilePath, { flag })
     } catch {
-        throw new Error(errorMessage)
+        throw error
     }
 }
 
