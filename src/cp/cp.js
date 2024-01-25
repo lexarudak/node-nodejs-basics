@@ -1,6 +1,23 @@
+import { spawn } from "child_process"
+import { join, dirname } from "path"
+import { fileURLToPath } from "url"
+import { pipeline } from "stream/promises"
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const scriptPath = join(__dirname, 'files', 'script.js')
+
 const spawnChildProcess = async (args) => {
-    // Write your code here
+    const childProcess = spawn("node", [scriptPath, ...args])
+
+    try {
+        await Promise.all([
+            pipeline(process.stdin, childProcess.stdin),
+            pipeline(childProcess.stdout, process.stdout, )
+        ])
+    } catch (e) {
+        console.log(`Wow... error: ${e}`);
+    }
+    
 };
 
-// Put your arguments in function call to test this functionality
-spawnChildProcess( /* [someArgument1, someArgument2, ...] */);
+spawnChildProcess([1, 2, 3]);
